@@ -323,6 +323,10 @@ public class ExcelWriteFillExecutor extends AbstractExcelWriteExecutor {
             cellWriteHandlerContext.setCell(cell);
             rowWriteHandlerContext.setRow(row);
             rowWriteHandlerContext.setRowIndex(analysisCell.getRowIndex());
+
+             Map<AnalysisCell, CellStyle> collectionFieldStyleMap = collectionFieldStyleCache.computeIfAbsent(
+                    currentUniqueDataFlag, key -> MapUtils.newHashMap());
+             collectionFieldStyleMap.put(analysisCell, cell.getCellStyle());
             return;
         }
         Sheet sheet = writeContext.writeSheetHolder().getSheet();
